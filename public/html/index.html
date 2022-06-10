@@ -29,8 +29,13 @@
           </form>
       </div>
     </div>
-    <div id="myDynamicTable"></div>
+    <form id="dynamic_table" name="table" method="post" action="../../modules/index.php"> </form>
+    <!-- <input id="export-button" type="submit" form="dynamic_table" value="Export to CSV"></a> -->
+
+    <a href="#" onclick="download_table_as_csv('dynamic_table');">Download as CSV</a>
+
     <script type="text/javascript" src="../js/dialog_toggle.js"></script>
     <script type="text/javascript" src="../js/table_create.js"></script>
+    <script type="text/javascript" src="../js/download_table_as_csv.js"></script>
   </body>
 </html>

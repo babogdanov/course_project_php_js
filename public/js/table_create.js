@@ -5,14 +5,12 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   const colsCount = document.getElementById("rows").value;
   const rowsCount = document.getElementById("columns").value;
-  console.log(colsCount, rowsCount);
   tableCreate(colsCount, rowsCount);
   modal.style.display = "none";
 });
 
 function tableCreate(colsCount, rowsCount) {
-  console.log("and here");
-  var myTableDiv = document.getElementById("myDynamicTable");
+  var myTableDiv = document.getElementById("dynamic_table");
 
   var table = document.createElement("table");
   table.border = "1";
@@ -25,22 +23,25 @@ function tableCreate(colsCount, rowsCount) {
     tableBody.appendChild(tr);
 
     for (var j = 0; j <= rowsCount; j++) {
-      var td = document.createElement("td");
-      td.width = "75";
-
       const isHeading = i === 0 || j === 0;
       const cellValue = !isHeading ? `Cell ${i}, ${j}` : `Heading ${i}, ${j}`;
+ 
       if (!isHeading) {
+        var td = document.createElement("td");
+        td.width = "75";
         const input = document.createElement("input");
         input.setAttribute("type", "text");
         input.setAttribute("value", cellValue);
-        //input.value=document.createTextNode(cellValue);
         td.appendChild(input);
-      } else if ((i === 0) ^ (j === 0)) {
-        td.appendChild(document.createTextNode(cellValue));
+        tr.appendChild(td);
+      } else  {
+        var th = document.createElement("th");
+        th.width = "75";
+        th.appendChild(document.createTextNode(cellValue));
+        tr.appendChild(th);
       }
 
-      tr.appendChild(td);
+      
     }
   }
   myTableDiv.appendChild(table);
