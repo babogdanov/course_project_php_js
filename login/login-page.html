@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="login-page.css">
+    <link rel="stylesheet" href="../common.css">
+    <script src="login-page.js"></script>
+</head>
+<body>
+
+<section class="navigation-bar">
+    <a href="../home-page.html">Home</a>
+    <a class="current" href="login-page.html">Sign In</a>
+    <a href="../register-page.html">Sign Up</a>
+</section>
+
+<section id="login-section">
+    <header id="title">
+        <h1>TABLE ANNOTATOR</h1>
+        <h1>SIGN IN</h1>
+		<img class="img" id="img1" src="resources/images/icon.png" alt="Image">
+    </header>
+
+    <div>
+
+        <form onsubmit="event.preventDefault(); validateAndShowErrorMessageIfNeeded()" id="loginForm">
+            <section id="email-section">
+                <label for="email" class="inputLabel">Email:</label>
+                <input type="email" placeholder="Email address" id="email" required>
+            </section>
+            <section id="password-section">
+                <label for="password" class="inputLabel">Password:</label>
+                <input type="password" placeholder="Password" id="password" required>
+            </section>
+            <button id="register-btn" type="submit">SIGN IN!</button>
+        </form>
+
+    </div>
+</section>
+
+</body>
+</html>
