@@ -42,8 +42,9 @@
   text-decoration: none;
   cursor: pointer;
 }
-form > * {
-  display: block;
+
+#dynamic_table {
+  display: none;
 }
 
 form input, select, button {

@@ -25,17 +25,17 @@
             <input type="number" id="columns" name="columns">
             <label for="rows">Rows:</label>
             <input type="number" id="rows" name="rows">
-            <input type="submit" id="table-create-btn" value="Create">
+            <button type="button" id="table-create-btn" onclick="tableCreate()">Create</button>
           </form>
       </div>
     </div>
-    <form id="dynamic_table" name="table" method="post" action="../../modules/index.php"> </form>
-    <!-- <input id="export-button" type="submit" form="dynamic_table" value="Export to CSV"></a> -->
+    <form id="dynamic_table" name="table"> 
+      <button type="button" onclick="saveTable()">Save Table</button>
+    </form>
 
-    <a href="#" onclick="download_table_as_csv('dynamic_table');">Download as CSV</a>
+    <a href="#" onclick="download_table_as_csv()">Download as CSV</a>
 
     <script type="text/javascript" src="../js/dialog_toggle.js"></script>
-    <script type="text/javascript" src="../js/table_create.js"></script>
-    <script type="text/javascript" src="../js/download_table_as_csv.js"></script>
+    <script type="text/javascript" src="../js/table.js"></script>
   </body>
 </html>
