@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="./../css/style.css">
+    <!--<link rel="stylesheet" href="../common.css">-->
+    <script src="register-page.js"></script>
+</head>
+<body>
+
+<section class="navigation-bar">
+    <a href="../home-page/home-page.html">Home</a>
+    <a href="../login-page/login-page.html">Sign In</a>
+    <a class="current" href="register-page.html">Sign Up</a>
+</section>
+
+<header id="title">
+    <h1>TABLE ANNOTATOR</h1>
+    <h1>SIGN UP</h1>
+    <img class="img" id="img1" src="./../resources/images/icon.png" alt="Image">
+</header>
+
+<div>
+
+    <form onsubmit="event.preventDefault(); validateAndShowErrorMessageIfNeeded()" id="registerForm">
+        <section id="name-section">
+            <label for="name" class="inputLabel">First Name:</label>
+            <input type="text" placeholder="First Name" id="name" name="name" required>
+        </section>
+        <section id="last-name-section">
+            <label for="last-name" class="inputLabel">Last Name:</label>
+            <input type="text" placeholder="Last Name" id="last-name" name="last-name" required>
+        </section>
+        <section id="email-section">
+            <label for="email" class="inputLabel">Email:</label>
+            <input type="email" placeholder="Email address" id="email" name="email" required>
+        </section>
+        <section id="password-section">
+            <label for="password" class="inputLabel">Password:</label>
+            <input type="password" placeholder="Password" id="password" name="password" required>
+        </section>
+        <section id="confirm-password-section">
+            <label for="confirm-password" class="inputLabel">Confirm Password:</label>
+            <input type="password" placeholder="Confirm password" id="confirm-password" required>
+        </section>
+        <button id="register-btn" type="submit">SIGN UP!</button>
+    </form>
+
+</div>
+
+</body>
+</html>
