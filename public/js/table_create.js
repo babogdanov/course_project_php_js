@@ -23,25 +23,15 @@ function tableCreate(colsCount, rowsCount) {
     tableBody.appendChild(tr);
 
     for (var j = 0; j <= rowsCount; j++) {
-      const isHeading = i === 0 || j === 0;
-      const cellValue = !isHeading ? `Cell ${i}, ${j}` : `Heading ${i}, ${j}`;
- 
-      if (!isHeading) {
-        var td = document.createElement("td");
-        td.width = "75";
-        const input = document.createElement("input");
-        input.setAttribute("type", "text");
-        input.setAttribute("value", cellValue);
-        td.appendChild(input);
-        tr.appendChild(td);
-      } else  {
-        var th = document.createElement("th");
-        th.width = "75";
-        th.appendChild(document.createTextNode(cellValue));
-        tr.appendChild(th);
-      }
+      const cellValue = `Cell ${i}, ${j}`;
 
-      
+      var td = document.createElement("td");
+      td.width = "75";
+      const input = document.createElement("input");
+      input.setAttribute("type", "text");
+      input.setAttribute("value", cellValue);
+      td.appendChild(input);
+      tr.appendChild(td);
     }
   }
   myTableDiv.appendChild(table);

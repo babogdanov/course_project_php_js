@@ -10,9 +10,7 @@ function download_table_as_csv(table_id, separator = ",") {
     var row = [],
       cols = rows[i].querySelectorAll("td, th");
     for (var j = 0; j < cols.length; j++) {
-      const isHeading = i === 0 || j === 0;
-
-      var data = isHeading ? cols[j].innerText : cols[j].firstChild.value;
+      var data =  cols[j].firstChild.value;
       // Clean innertext to remove multiple spaces and jumpline (break csv)
       data = data.replace(/(\r\n|\n|\r)/gm, "").replace(/(\s\s)/gm, " ");
       // Escape double-quote with double-double-quote (see https://stackoverflow.com/questions/17808511/properly-escape-a-double-quote-in-csv)
