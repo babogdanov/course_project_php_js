@@ -1,5 +1,5 @@
 // Quick and simple export target #table_id into a csv
-function download_table_as_csv(table_id, separator = ",") {
+function download_table_as_csv(table_id, separator = ";") {
   console.log("got here");
   // Select rows from table_id
   var rows = document.querySelectorAll("#" + table_id + " table tbody tr");
