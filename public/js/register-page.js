@@ -14,7 +14,7 @@ const EMAIL_ERROR_MESSAGE = "Email is invalid!";
 const PASSWORD_ID = "password";
 const PASSWORD_SECTION_ID = "password-section";
 const PASSWORD_ERROR_LABEL = "labelForPassword";
-const PASSWORD_ERROR_MESSAGE = "Password is invalid!";
+const PASSWORD_ERROR_MESSAGE = "Password is invalid! It should consist of at least 8 small letters and/or numbers.";
 const CONFIRM_PASSWORD_ID = "confirm-password";
 const CONFIRM_PASSWORD_SECTION_ID = "confirm-password-section";
 const CONFIRM_PASSWORD_ERROR_LABEL = "labelForConfirmPassword";
@@ -28,7 +28,7 @@ function validateAndShowErrorMessageIfNeeded() {
     const isPasswordConfirmed = validateConfirmPassword();
     if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid && isPasswordConfirmed) {
         const data = {
-            'username': document.getElementById("username").value,
+            'username': document.getElementById("email").value,
             'password': document.getElementById("password").value,
         }
 
@@ -41,7 +41,7 @@ function validateAndShowErrorMessageIfNeeded() {
             })
             .then((body) => {
                 alert("You have signed up successfully! Redirecting to sign in page...");
-                location.href = '../login-page/login-page.html';
+                location.href = 'login-page.html';
             });
     }
 
@@ -73,7 +73,7 @@ function validateLastName() {
 }
 
 function validateEmail() {
-    const emailAddressPattern = /^[a-zA-Z0-9\-\_]+@[a-z\-]+.[a-z]+$/;
+    const emailAddressPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     const emailAddress = document.getElementById(EMAIL_ID).value;
     if (!emailAddressPattern.test(emailAddress)) {
         addLabelForWrongInput(EMAIL_ERROR_LABEL, EMAIL_ERROR_MESSAGE, EMAIL_ID, EMAIL_SECTION_ID);
