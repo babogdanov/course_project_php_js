@@ -56,13 +56,11 @@ function tableCreate() {
   const rowsCount = document.getElementById("columns").value;
 
   var table = document.createElement("table");
-  /* var tableHead = document.createElement("thead");
   var tableName = document.createElement("input");
   tableName.setAttribute("id", "table_name");
   tableName.setAttribute("type", "text");
   tableName.setAttribute("value", "Enter table name");
-  tableHead.appendChild(tableName);
-  table.appendChild(tableHead); */
+  myTableDiv.appendChild(tableName);
   var tableBody = document.createElement("tbody");
   table.appendChild(tableBody);
 
@@ -114,8 +112,8 @@ function saveTable() {
     },
     body: JSON.stringify(data),
   })
-    .then((res) => res.text())
-    .then((data) => {
-      location.href = data;
-    });
+  .then((res) => res.text())
+  .then((data) => {
+    location.href = data;
+  });
 }

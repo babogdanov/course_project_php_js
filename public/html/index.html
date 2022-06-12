@@ -47,7 +47,7 @@
         </div>
       </div>
       <form id="dynamic_table" name="table">
-        <button class="table-button" onclick="saveTable()">Save Table</button>
+        <button class="table-button" onclick="event.preventDefault(); saveTable()">Save Table</button>
       </form>
 
       <button class="table-button" onclick="download_table_as_csv()">

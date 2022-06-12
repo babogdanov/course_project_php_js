@@ -16,10 +16,10 @@
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
  
         if (password_verify($password, $result["password"])) {
-           echo '../home-page/home-page.html';
+           echo '../html/index.html';
         } else {
             http_response_code(400);
-            echo '../login-page/login-page.html'; 
+            echo '../html/login-page.html'; 
         }
 
     } catch (Exception $e) {
