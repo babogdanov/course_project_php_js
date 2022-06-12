@@ -13,7 +13,7 @@ function validateAndShowErrorMessageIfNeeded() {
     const isPasswordValid = validatePassword();
     if (isEmailValid && isPasswordValid) {
         const data = {
-           username: document.getElementById('username').value,
+           email: document.getElementById('email').value,
            password: document.getElementById('password').value,
         }
 
@@ -26,7 +26,7 @@ function validateAndShowErrorMessageIfNeeded() {
         })
         .then(res => res.text())
         .then((data) => {
-            localStorage.setItem("username", document.getElementById('email').value);
+            localStorage.setItem("email", document.getElementById('email').value);
             location.href = data;
         });
     }

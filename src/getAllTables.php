@@ -3,15 +3,15 @@
 require_once("./db/db.php");
 
 if($_GET) {
-    $username = $_GET["username"];
+    $email = $_GET["email"];
 
     try {
         $db = new DB();
         $connection = $db->getConnection();
 
-        $sql = "SELECT `id`, `name` FROM `table` WHERE `username` = :username";
+        $sql = "SELECT `id`, `name` FROM `table` WHERE `email` = :email";
         $stmt = $connection->prepare($sql);
-        $stmt->execute(["username" => $username]);
+        $stmt->execute(["email" => $email]);
 
         $result = array();
         while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {

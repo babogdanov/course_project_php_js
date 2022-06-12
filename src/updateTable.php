@@ -5,18 +5,19 @@ require_once("./db/db.php");
 $post = json_decode(file_get_contents("php://input"), true);
 
 if($post) {
-    $email = $post["email"];
-    $password = $post["password"];
+    $tableID = $post["id"];
+    $name = $post["name"];
+    $table = $post["table"];
 
     try {
         $db = new DB();
         $connection = $db->getConnection();
 
-        $sql = "INSERT INTO `users` (`email`, `password`) VALUES (:email, :password)";
+        $sql = "UPDATE `tables` SET `name` = :name, `table` = :table WHERE `id` = :id";
         $stmt = $connection->prepare($sql);
-        $stmt->execute(["email" => $email, "password" => password_hash($password, PASSWORD_DEFAULT)]);
+        $stmt->execute(["name" => $name, "table" => json_encode($table), "id" => $tableID]);
 
-        echo '../html/login.html';
+        echo '../html/index.html';
     } catch (PDOException $e){
         http_response_code(500);
         echo json_encode(["status" => "ERROR", "message" => $e]);

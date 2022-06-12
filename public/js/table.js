@@ -1,5 +1,5 @@
 function checkIfUserIsLogged() {
-    if (!localStorage.getItem("username")) {
+    if (!localStorage.getItem("email")) {
         alert("You have to be logged in to enter the page!");
         location.href = '../html/login-page.html';
     }
@@ -92,7 +92,7 @@ function saveTable() {
 
     const data = {
         'name': document.getElementById("table_name").value,
-        'creator': localStorage.getItem("username"),
+        'creator': localStorage.getItem("email"),
         'rows': tableData.length,
         'columns': tableData[0].length,
         'table': tableData,
