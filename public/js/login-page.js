@@ -48,7 +48,7 @@ function validateEmail() {
 function validatePassword() {
     const passwordPattern = /^[a-z0-9]+$/i;
     const password = document.getElementById(PASSWORD_ID).value;
-    if (password?.length < 8 || !passwordPattern.test(password)) {
+    if (password?.length < 6 || !passwordPattern.test(password)) {
         addLabelForWrongInput(PASSWORD_ERROR_LABEL, PASSWORD_ERROR_MESSAGE, PASSWORD_ID, PASSWORD_SECTION_ID);
         return false;
     } else {
