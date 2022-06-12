@@ -28,7 +28,7 @@ function validateAndShowErrorMessageIfNeeded() {
     const isPasswordConfirmed = validateConfirmPassword();
     if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid && isPasswordConfirmed) {
         const data = {
-            'username': document.getElementById("email").value,
+            'username': document.getElementById("username").value,
             'password': document.getElementById("password").value,
         }
 

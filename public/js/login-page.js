@@ -13,7 +13,7 @@ function validateAndShowErrorMessageIfNeeded() {
     const isPasswordValid = validatePassword();
     if (isEmailValid && isPasswordValid) {
         const data = {
-           username: document.getElementById('email').value,
+           username: document.getElementById('username').value,
            password: document.getElementById('password').value,
         }
 
