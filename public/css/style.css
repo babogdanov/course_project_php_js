@@ -1,41 +1,79 @@
+body {
+  overflow-x: hidden;
+  background-color: #282c34;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  pointer-events: auto;
+}
+
 /* Modal Header */
 .dialog-header {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-  }
-  
-  /* Modal Body */
-  .dialog-body {padding: 2px 16px;}
-  
-  /* Modal Content */
-  .dialog-content {
-      display: none;
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-    width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    animation-name: slideFromBottom;
-    animation-duration: 0.4s
-  }
-  
-  /* Add Animation */
-  @keyframes slideFromBottom {
-    from {top: -300px; opacity: 0}
-    to {top: 0; opacity: 1}
-  }
+  padding: 2px 16px;
+  background-color: #5cb85c;
+}
 
-  /* The Close Button */
-#dialog-close-icon {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+/* Modal Body */
+.dialog-body {
+  padding: 2px 16px;
+}
+
+/* Modal Content */
+.dialog-content {
+  display: none;
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: slideFromBottom;
+  animation-duration: 1s;
+}
+
+/* Add Animation */
+@keyframes slideFromBottom {
+  from {
+    top: -300px;
+    opacity: 0;
   }
-  
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.img:hover {
+  animation-name: lift;
+  animation-duration: 1s;
+}
+
+a {
+  text-decoration: none;
+  color: #2975a5;
+}
+
+@keyframes lift {
+  from {
+    transform: translate(0, 0px);
+  }
+  to {
+    transform: translate(0, -10px);
+  }
+}
+
+/* The Close Button */
+#dialog-close-icon {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
 #dialog-close-icon:hover,
 #dialog-close-icon:focus {
   color: black;
@@ -47,7 +85,9 @@
   display: none;
 }
 
-form input, select, button {
+form input,
+select,
+button {
   display: block;
   width: 363px;
   height: 38px;
@@ -62,21 +102,15 @@ form input, select, button {
   border-radius: 25px;
 }
 
-div {
-  width: 401px;
-  height: fit-content;
-  padding: 19px;
-  text-align: center;
-  margin: 20px auto;
-}
-
-input, select {
+input,
+select {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-input:hover, select:hover {
+input:hover,
+select:hover {
   border: 2px solid #5776f1;
 }
 
@@ -97,28 +131,25 @@ input:hover, select:hover {
 
 h1 {
   text-align: center;
-  color: rgb(0, 0, 0);
   font-size: xxx-large;
 }
 
-
 #login-section {
-  vertical-align:middle;
+  vertical-align: middle;
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-  display:table;
+  display: table;
 }
 
 form {
-  display:table;
-  margin:auto;
+  display: table;
+  margin: auto;
 }
 
 .inputLabel {
   display: flex;
-  color: rgb(0, 0, 0);
   font-size: large;
   font-weight: bold;
 }
@@ -138,10 +169,33 @@ section input {
   align-items: center;
 }
 .img {
-display: block;
-margin-left: auto;
-margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 
-width: 5%;
-height: 3%;
+  width: 5%;
+  height: 3%;
+}
+
+nav {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+nav a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+nav a:hover {
+  background-color: #111;
+}
+
+.active {
+  background-color: #2975a5;
 }
