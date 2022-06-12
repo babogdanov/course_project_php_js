@@ -26,8 +26,9 @@ function validateAndShowErrorMessageIfNeeded() {
         })
         .then(res => res.text())
         .then((data) => {
+            console.log(data);
             localStorage.setItem("email", document.getElementById('email').value);
-            location.href = data;
+            //location.href = data;
         });
     }
 }
@@ -35,7 +36,7 @@ function validateAndShowErrorMessageIfNeeded() {
 function validateEmail() {
     const emailAddressPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     const emailAddress = document.getElementById(EMAIL_ID).value;
-    console.log(emailAddress)
+
     if (!emailAddressPattern.test(emailAddress)) {
         addLabelForWrongInput(EMAIL_ERROR_LABEL, EMAIL_ERROR_MESSAGE, EMAIL_ID, EMAIL_SECTION_ID);
         return false;

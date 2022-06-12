@@ -1,5 +1,5 @@
 <?php
- require_once("../db/db.php");
+ require_once("./db/db.php");
 
  $post = json_decode(file_get_contents("php://input"), true);
 
@@ -10,7 +10,7 @@
         $db = new DB();
         $connection = $db->getConnection();
  
-        $sql = "SELECT `password` FROM user where email = :email";
+        $sql = "SELECT `password` FROM users where email = :email";
         $stmt = $connection->prepare($sql);
         $stmt->execute(["email" => $email]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);

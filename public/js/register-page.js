@@ -24,7 +24,10 @@ function validateAndShowErrorMessageIfNeeded() {
 
         fetch("../../src/register.php", {
             method: "POST",
-            body: data
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         })
             .then(function (response) {
                 return response.text();

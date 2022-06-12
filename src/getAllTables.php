@@ -9,7 +9,7 @@ if($_GET) {
         $db = new DB();
         $connection = $db->getConnection();
 
-        $sql = "SELECT `id`, `name` FROM `table` WHERE `email` = :email";
+        $sql = "SELECT `id`, `name` FROM `tables` WHERE `email` = :email";
         $stmt = $connection->prepare($sql);
         $stmt->execute(["email" => $email]);
 

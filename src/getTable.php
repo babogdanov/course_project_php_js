@@ -9,7 +9,7 @@ if($_GET) {
         $db = new DB();
         $connection = $db->getConnection();
 
-        $sql = "SELECT * FROM `table` WHERE `id` = :id";
+        $sql = "SELECT * FROM `tables` WHERE `id` = :id";
         $stmt = $connection->prepare($sql);
         $stmt->execute(["id" => $tableID]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
