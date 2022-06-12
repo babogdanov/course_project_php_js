@@ -3,16 +3,16 @@
 
  $post = json_decode(file_get_contents("php://input"), true);
 
- if ($post && isset($post["username"]) && isset($post["password"])) {
-    $username = $post["username"];
+ if ($post && isset($post["email"]) && isset($post["password"])) {
+    $email = $post["email"];
     $password = $post["password"];
     try {
         $db = new DB();
         $connection = $db->getConnection();
  
-        $sql = "SELECT `password` FROM user where username = :username";
+        $sql = "SELECT `password` FROM user where email = :email";
         $stmt = $connection->prepare($sql);
-        $stmt->execute(["username" => $username]);
+        $stmt->execute(["email" => $email]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
  
         if (password_verify($password, $result["password"])) {

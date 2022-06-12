@@ -15,9 +15,9 @@ if($post) {
         $db = new DB();
         $connection = $db->getConnection();
 
-        $selectSQL = "SELECT `id` FROM `users` WHERE `username` = :username";
+        $selectSQL = "SELECT `id` FROM `users` WHERE `email` = :email";
         $stmt = $connection->prepare($selectSQL);
-        $stmt->execute(["username" => $creator]);
+        $stmt->execute(["email" => $creator]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $insertSQL = "INSERT INTO `tables` (`name`, `creatorID`, `rows`, `columns`, `table`) VALUES (:name, :creatorID, :rows, :columns, :table)";
