@@ -26,9 +26,8 @@ function validateAndShowErrorMessageIfNeeded() {
         })
         .then(res => res.text())
         .then((data) => {
-            console.log(data);
             localStorage.setItem("email", document.getElementById('email').value);
-            //location.href = data;
+            location.href = data;
         });
     }
 }
