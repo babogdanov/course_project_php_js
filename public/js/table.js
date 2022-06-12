@@ -1,5 +1,5 @@
 // Quick and simple export target #table_id into a csv
-function download_table_as_csv(separator = ";") {
+function download_table_as_csv(separator = ",") {
     // Select rows from table_id
     var rows = document.querySelectorAll("#dynamic_table table tbody tr");
   
@@ -22,7 +22,7 @@ function download_table_as_csv(separator = ";") {
     var csv_string = csv.join("\n");
     // Download it
     var filename =
-      "export_" + table_id + "_" + new Date().toLocaleDateString() + ".csv";
+      "export_table" + "_" + new Date().toLocaleDateString() + ".csv";
     var link = document.createElement("a");
     link.style.display = "none";
     link.setAttribute("target", "_blank");
@@ -59,7 +59,7 @@ function tableCreate() {
         const input = document.createElement("input");
         input.setAttribute("type", "text");
         input.setAttribute("name", cellName);
-
+        input.setAttribute("value", cellName);
         td.appendChild(input);
         tr.appendChild(td);
       }
