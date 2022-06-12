@@ -5,4 +5,30 @@ fetch("../html/nav.html")
     let newelem = document.createElement("div");
     newelem.innerHTML = text;
     oldelem.parentNode.replaceChild(newelem, oldelem);
+    changeNav();
   });
+
+function changeNav() {
+  var nav = document.getElementById("navbar");
+  if (!localStorage.getItem("email")) {
+    var signUpLink = document.createElement("a");
+    signUpLink.setAttribute("href", "register-page.html");
+    signUpLink.innerText = "Sign up";
+    nav.appendChild(signUpLink);
+
+    var logInLink = document.createElement("a");
+    logInLink.setAttribute("href", "login-page.html");
+    logInLink.innerText = "Log in";
+    nav.appendChild(logInLink);
+  } else {
+    var logOutLink = document.createElement("a");
+    logOutLink.setAttribute("href", "index.html");
+    logOutLink.setAttribute("onclick", "logOut()");
+    logOutLink.innerHTML = "Log out";
+    nav.appendChild(logOutLink);
+  }
+}
+
+function logOut() {
+  localStorage.setItem("email", "");
+}
