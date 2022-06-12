@@ -9,6 +9,7 @@ PRIMARY KEY (`id`));
 
 CREATE TABLE `tables` (
 `id` INT NOT NULL AUTO_INCREMENT,
+`name` VARCHAR(255) NOT NULL,
 `creatorID` INT NOT NULL,
 `rows` INT NOT NULL,
 `columns`INT NOT NULL, 

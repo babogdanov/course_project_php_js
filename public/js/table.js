@@ -91,6 +91,7 @@ function saveTable() {
     }
 
     const data = {
+        'name': document.getElementById("table_name").value,
         'creator': localStorage.getItem("username"),
         'rows': tableData.length,
         'columns': tableData[0].length,

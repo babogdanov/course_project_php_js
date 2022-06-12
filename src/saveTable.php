@@ -5,6 +5,7 @@ require_once("./db/db.php");
 $post = json_decode(file_get_contents("php://input"), true);
 
 if($post) {
+    $name = $post["name"];
     $creator = $post["creator"];
     $rows = $post["rows"];
     $columns = $post["columns"];
@@ -19,9 +20,9 @@ if($post) {
         $stmt->execute(["username" => $creator]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $insertSQL = "INSERT INTO `tables` (`creatorID`, `rows`, `columns`, `table`) VALUES (:creatorID, :rows, :columns, :table)";
+        $insertSQL = "INSERT INTO `tables` (`name`, `creatorID`, `rows`, `columns`, `table`) VALUES (:name, :creatorID, :rows, :columns, :table)";
         $stmt = $connection->prepare($insertSQL);
-        $stmt->execute(["creatorID" => $result["id"], "rows" => $rows,"columns" => $columns, "table" => json_encode($table)]);
+        $stmt->execute(["name" => $name, "creatorID" => $result["id"], "rows" => $rows,"columns" => $columns, "table" => json_encode($table)]);
 
         echo '../html/index.html';
     } catch (PDOException $e){
