@@ -23,7 +23,7 @@ if($post) {
         $stmt = $connection->prepare($insertSQL);
         $stmt->execute(["creatorID" => $result["id"], "rows" => $rows,"columns" => $columns, "table" => json_encode($table)]);
 
-        echo '../public/html/index.html';
+        echo '../html/index.html';
     } catch (PDOException $e){
         http_response_code(500);
         echo json_encode(["status" => "ERROR", "message" => $e]);

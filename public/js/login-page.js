@@ -12,14 +12,12 @@ function validateAndShowErrorMessageIfNeeded() {
     const isEmailValid = validateEmail();
     const isPasswordValid = validatePassword();
     if (isEmailValid && isPasswordValid) {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-         const data = {
-          email,
-          password
-         }
+        const data = {
+           username: document.getElementById('username').value,
+           password: document.getElementById('password').value,
+        }
 
-        fetch('../', {
+        fetch('../../src/login.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -28,7 +26,7 @@ function validateAndShowErrorMessageIfNeeded() {
         })
         .then(res => res.text())
         .then((data) => {
-            localStorage.setItem("email", document.getElementById('email').value);
+            localStorage.setItem("username", document.getElementById('username').value);
             location.href = data;
         });
     }

@@ -1,3 +1,12 @@
+function checkIfUserIsLogged() {
+    if (!localStorage.getItem("username")) {
+        alert("You have to be logged in to enter the page!");
+        location.href = '../html/login-page.html';
+    }
+}
+
+checkIfUserIsLogged();
+
 // Quick and simple export target #table_id into a csv
 function download_table_as_csv(separator = ",") {
     // Select rows from table_id

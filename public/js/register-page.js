@@ -27,12 +27,12 @@ function validateAndShowErrorMessageIfNeeded() {
     const isPasswordValid = validatePassword();
     const isPasswordConfirmed = validateConfirmPassword();
     if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid && isPasswordConfirmed) {
-        const data = new FormData();
-        data.append('name', document.getElementById("name").value);
-        data.append('last-name', document.getElementById("last-name").value);
-        data.append('email', document.getElementById("email").value);
-        data.append('password', document.getElementById("password").value);
-        fetch("../api/registration.php", {
+        const data = {
+            'username': document.getElementById("username").value,
+            'password': document.getElementById("password").value,
+        }
+
+        fetch("../../src/register.php", {
             method: "POST",
             body: data
         })
