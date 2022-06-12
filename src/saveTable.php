@@ -4,7 +4,7 @@ require_once("./db/db.php");
 
 $post = json_decode(file_get_contents("php://input"), true);
 
-if($post) {
+if($post && isset($post["name"]) && isset($post["creator"]) && isset($post["rows"]) && isset($post["columns"]) && isset($post["table"])) {
     $name = $post["name"];
     $creator = $post["creator"];
     $rows = $post["rows"];
@@ -24,11 +24,12 @@ if($post) {
         $stmt = $connection->prepare($insertSQL);
         $stmt->execute(["name" => $name, "creatorID" => $result["id"], "rows" => $rows,"columns" => $columns, "table" => json_encode($table)]);
 
-        echo '../html/index.html';
+        echo json_encode(["status" => 201]);
     } catch (PDOException $e){
-        http_response_code(500);
-        echo json_encode(["status" => "ERROR", "message" => $e]);
+        echo json_encode(["status" => 500, "message" => $e->getMessage()]);
     }
-}
+} else {
+    echo json_encode(["status" => 400, "message" => "something is not set in request body"]); 
+ }
 
 ?>

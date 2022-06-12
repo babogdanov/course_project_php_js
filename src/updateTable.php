@@ -4,7 +4,7 @@ require_once("./db/db.php");
 
 $post = json_decode(file_get_contents("php://input"), true);
 
-if($post) {
+if($post && isset($post["id"]) && isset($post["name"]) && isset($post["table"])) {
     $tableID = $post["id"];
     $name = $post["name"];
     $table = $post["table"];
@@ -17,11 +17,12 @@ if($post) {
         $stmt = $connection->prepare($sql);
         $stmt->execute(["name" => $name, "table" => json_encode($table), "id" => $tableID]);
 
-        echo '../html/index.html';
+        echo json_encode(["status" => 204]);
     } catch (PDOException $e){
-        http_response_code(500);
-        echo json_encode(["status" => "ERROR", "message" => $e]);
+        echo json_encode(["status" => 500, "message" => $e->getMessage()]);
     }
-}
+} else {
+    echo json_encode(["status" => 400, "message" => "something is not set in request body"]); 
+ }
 
 ?>

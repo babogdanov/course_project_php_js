@@ -5,6 +5,17 @@ function checkIfUserIsLogged() {
   }
 }
 
+function tempAlert(msg,duration) {
+    var el = document.createElement("div");
+    el.setAttribute("style","padding:20px;margin-bottom:15px;background-color:white;color:black;text-align:center");
+    el.innerHTML = msg;
+    setTimeout(function(){
+     el.parentNode.removeChild(el);
+    },duration);
+    var nav = document.getElementById("navbar");
+    nav.parentNode.insertBefore(el, nav.nextSibling);
+  }
+
 checkIfUserIsLogged();
 
 // Quick and simple export target #table_id into a csv
@@ -118,8 +129,21 @@ function saveTable() {
     },
     body: JSON.stringify(data),
   })
-  .then((res) => res.text())
+  .then((res) => res.json())
   .then((data) => {
-    location.href = "../html/my-tables-page.html";
+    if (data["status"] == 201) {
+        tempAlert("Успешна запазване таблица! Пренасочване към моите таблици.", 4000);
+        setTimeout(function(){
+            location.href = "my-tables-page.html";
+        },4000);
+    } else if (data["status"] == 400) {
+        console.log(data["message"]);
+        tempAlert("Подадените данни не са валидни!", 4000);
+        location.href = "table-create.html";
+    } else {
+        console.log(data["message"]);
+        tempAlert("Нещо много се обърка!", 4000);
+        location.href = "table-create.html";
+    }
   });
 }

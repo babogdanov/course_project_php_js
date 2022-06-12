@@ -2,7 +2,7 @@
 
 require_once("./db/db.php");
 
-if($_GET) {
+if($_GET && isset($_GET["id"])) {
     $tableID = $_GET["id"];
 
     try {
@@ -13,17 +13,21 @@ if($_GET) {
         $stmt = $connection->prepare($sql);
         $stmt->execute(["id" => $tableID]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        echo json_encode(array(
-            "name" => $result["name"],
-            "rows" => $result["rows"],
-            "columns" => $result["columns"],
-            "table" => $result["table"],
-        ));
+        if ($result == false) {
+            echo json_encode(["status" => 404]);
+        } else {
+            echo json_encode(["status" => 200, "table" => array(
+                "name" => $result["name"],
+                "rows" => $result["rows"],
+                "columns" => $result["columns"],
+                "table" => $result["table"],
+            )]);
+        }
     } catch (PDOException $e){
-        http_response_code(500);
-        echo json_encode(["status" => "ERROR", "message" => $e]);
+        echo json_encode(["status" => 500, "message" => $e->getMessage()]);
     }
+} else {
+    echo json_encode(["status" => 400, "message" => "something is not set in request body"]);
 }
 
 ?>

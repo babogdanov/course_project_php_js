@@ -4,7 +4,7 @@ require_once("./db/db.php");
 
 $post = json_decode(file_get_contents("php://input"), true);
 
-if($post) {
+if($post && isset($post["email"])) {
     $email = $post["email"];
 
     try {
@@ -28,11 +28,12 @@ if($post) {
             ));
         }
 
-        echo json_encode($result);
+        echo json_encode(["status" => 200, "tables" => $result]);
     } catch (PDOException $e){
-        http_response_code(500);
-        echo json_encode(["status" => "ERROR", "message" => $e]);
+        echo json_encode(["status" => 500, "message" => $e->getMessage()]);
     }
+} else {
+    echo json_encode(["status" => 400, "message" => "something is not set in request body"]);
 }
 
 ?>

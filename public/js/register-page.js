@@ -13,6 +13,17 @@ const CONFIRM_PASSWORD_SECTION_ID = "confirm-password-section";
 const CONFIRM_PASSWORD_ERROR_LABEL = "labelForConfirmPassword";
 const CONFIRM_PASSWORD_ERROR_MESSAGE = "Passwords must match!";
 
+function tempAlert(msg,duration) {
+    var el = document.createElement("div");
+    el.setAttribute("style","padding:20px;margin-bottom:15px;background-color:white;color:black;text-align:center");
+    el.innerHTML = msg;
+    setTimeout(function(){
+     el.parentNode.removeChild(el);
+    },duration);
+    var nav = document.getElementById("navbar");
+    nav.parentNode.insertBefore(el, nav.nextSibling);
+  }
+
 function validateAndShowErrorMessageIfNeeded() {
   const isEmailValid = validateEmail();
   const isPasswordValid = validatePassword();
@@ -30,14 +41,20 @@ function validateAndShowErrorMessageIfNeeded() {
       },
       body: JSON.stringify(data),
     })
-      .then(function (response) {
-        return response.text();
-      })
-      .then((body) => {
-        alert(
-          "You have signed up successfully! Redirecting to sign in page..."
-        );
-        location.href = "login-page.html";
+      .then((res) => res.json())
+      .then((data) => {
+        if (data["status"] == 201) {
+            tempAlert("Успешна регистрация! Пренасочване към вход.", 4000);
+            setTimeout(function(){
+                location.href = "login-page.html";
+            },4000);
+        } else if (data["status"] == 400) {
+            console.log(data["message"]);
+            tempAlert("Подадените данни не са валидни!", 4000);
+        } else {
+            console.log(data["message"]);
+            tempAlert("Нещо много се обърка!", 4000);
+        }
       });
   }
 }

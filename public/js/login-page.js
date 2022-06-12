@@ -8,6 +8,17 @@ const PASSWORD_SECTION_ID = "password-section";
 const PASSWORD_ERROR_LABEL = "labelForPassword";
 const PASSWORD_ERROR_MESSAGE = "Password is invalid!";
 
+function tempAlert(msg,duration) {
+    var el = document.createElement("div");
+    el.setAttribute("style","padding:20px;margin-bottom:15px;background-color:white;color:black;text-align:center");
+    el.innerHTML = msg;
+    setTimeout(function(){
+     el.parentNode.removeChild(el);
+    },duration);
+    var nav = document.getElementById("navbar");
+    nav.parentNode.insertBefore(el, nav.nextSibling);
+  }
+
 function validateAndShowErrorMessageIfNeeded() {
   const isEmailValid = validateEmail();
   const isPasswordValid = validatePassword();
@@ -24,10 +35,18 @@ function validateAndShowErrorMessageIfNeeded() {
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.text())
+      .then((res) => res.json())
       .then((data) => {
-        localStorage.setItem("email", document.getElementById("email").value);
-        location.href = data;
+        if (data["status"] == 204) {
+            localStorage.setItem("email", document.getElementById("email").value);
+            location.href = "index.html";
+        } else if (data["status"] == 400) {
+            console.log(data["message"]);
+            tempAlert("Подадените данни не са валидни!", 4000);
+        } else {
+            console.log(data["message"]);
+            tempAlert("Нещо много се обърка!", 4000);
+        }
       });
   }
 }

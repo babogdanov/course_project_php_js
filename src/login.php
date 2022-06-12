@@ -14,22 +14,21 @@
         $stmt = $connection->prepare($sql);
         $stmt->execute(["email" => $email]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
- 
-        if (password_verify($password, $result["password"])) {
-           echo '../html/index.html';
+        if ($result == false) {
+            echo json_encode(["status" => 400, "message" => "email is not correct"]);
         } else {
-            http_response_code(400);
-            echo '../html/login-page.html'; 
+            if (password_verify($password, $result["password"])) {
+                echo json_encode(["status" => 204]);
+             } else {
+                 echo json_encode(["status" => 400, "message" => "password is not correct"]);
+             }
         }
-
     } catch (Exception $e) {
-        http_response_code(500);
-        echo json_encode(["status" => "ERROR", "message" => $e->getMessage()]); 
+        echo json_encode(["status" => 500, "message" => $e->getMessage()]); 
     }
 
  } else {
-    http_response_code(400);
-    echo json_encode(["status" => "ERROR", "message" => "Некоректни данни!"]); 
+    echo json_encode(["status" => 400, "message" => "something is not set in request body"]); 
  }
 
 ?>

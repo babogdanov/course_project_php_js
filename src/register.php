@@ -4,7 +4,7 @@ require_once("./db/db.php");
 
 $post = json_decode(file_get_contents("php://input"), true);
 
-if($post) {
+if($post && isset($post["email"]) && isset($post["password"])) {
     $email = $post["email"];
     $password = $post["password"];
 
@@ -16,11 +16,12 @@ if($post) {
         $stmt = $connection->prepare($sql);
         $stmt->execute(["email" => $email, "password" => password_hash($password, PASSWORD_DEFAULT)]);
 
-        echo '../html/login.html';
+        echo json_encode(["status" => 201]);
     } catch (PDOException $e){
-        http_response_code(500);
-        echo json_encode(["status" => "ERROR", "message" => $e]);
+        echo json_encode(["status" => 500, "message" => $e->getMessage()]);
     }
-}
+} else {
+    echo json_encode(["status" => 400, "message" => "something is not set in request body"]); 
+ }
 
 ?>
