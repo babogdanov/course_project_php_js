@@ -240,9 +240,12 @@ tbody tr:nth-child(even) {
 table {
   margin: auto;
   left: 50%;
+  animation-name: slideFromBottom;
+  animation-duration: 1s;
 }
 
 td > input {
   background-color: lightblue;
   max-width: 150px;
 }
+
