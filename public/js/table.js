@@ -46,13 +46,23 @@ function download_table_as_csv(separator = ",") {
 }
 
 function tableCreate() {
+  var myTableDiv = document.getElementById("dynamic_table");
+  //FIXME: Remove if we get to the point of joining tables.
+  if (myTableDiv.style.display === "block") {
+    alert("Can't create another table yet.");
+    return;
+  }
   const colsCount = document.getElementById("rows").value;
   const rowsCount = document.getElementById("columns").value;
 
-  var myTableDiv = document.getElementById("dynamic_table");
   var table = document.createElement("table");
-  table.border = "1";
-
+  /* var tableHead = document.createElement("thead");
+  var tableName = document.createElement("input");
+  tableName.setAttribute("id", "table_name");
+  tableName.setAttribute("type", "text");
+  tableName.setAttribute("value", "Enter table name");
+  tableHead.appendChild(tableName);
+  table.appendChild(tableHead); */
   var tableBody = document.createElement("tbody");
   table.appendChild(tableBody);
 
@@ -63,7 +73,6 @@ function tableCreate() {
       const cellName = `${i}-${j}`;
 
       var td = document.createElement("td");
-      td.width = "75";
 
       const input = document.createElement("input");
       input.setAttribute("type", "text");
