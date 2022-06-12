@@ -7,7 +7,7 @@ const PASSWORD_ID = "password";
 const PASSWORD_SECTION_ID = "password-section";
 const PASSWORD_ERROR_LABEL = "labelForPassword";
 const PASSWORD_ERROR_MESSAGE =
-  "Password is invalid! It should consist of at least 8 small letters and/or numbers.";
+  "Password is invalid! It should consist of at least 6 small letters and/or numbers.";
 const CONFIRM_PASSWORD_ID = "confirm-password";
 const CONFIRM_PASSWORD_SECTION_ID = "confirm-password-section";
 const CONFIRM_PASSWORD_ERROR_LABEL = "labelForConfirmPassword";
@@ -62,7 +62,7 @@ function validateEmail() {
 function validatePassword() {
   const passwordPattern = /^[a-z0-9]+$/i;
   const password = document.getElementById(PASSWORD_ID).value;
-  if (password?.length < 8 || !passwordPattern.test(password)) {
+  if (password?.length < 6 || !passwordPattern.test(password)) {
     addLabelForWrongInput(
       PASSWORD_ERROR_LABEL,
       PASSWORD_ERROR_MESSAGE,
@@ -77,7 +77,7 @@ function validatePassword() {
 }
 
 function validateConfirmPassword() {
-  const passwordPattern = /^[a-z0-9]{8,}$/i;
+  const passwordPattern = /^[a-z0-9]{6,}$/i;
   const password = document.getElementById(PASSWORD_ID).value;
   const confirmPassword = document.getElementById(CONFIRM_PASSWORD_ID).value;
   if (!passwordPattern.test(password) || password !== confirmPassword) {
