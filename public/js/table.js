@@ -46,6 +46,7 @@ function download_table_as_csv(separator = ",") {
 }
 
 function tableCreate() {
+  
   var myTableDiv = document.getElementById("dynamic_table");
   //FIXME: Remove if we get to the point of joining tables.
   if (myTableDiv.style.display === "block") {
@@ -54,7 +55,12 @@ function tableCreate() {
   }
   const colsCount = document.getElementById("rows").value;
   const rowsCount = document.getElementById("columns").value;
-
+  console.log(colsCount,rowsCount)
+  //FIXME: not working for text
+  if(Number.isNaN(colsCount) || colsCount <= 0 || Number.isNaN(rowsCount) || rowsCount <= 0){
+    alert("Invalid values for columns and rows.");
+    return;
+  }
   var table = document.createElement("table");
   var tableName = document.createElement("input");
   tableName.setAttribute("id", "table_name");
@@ -114,6 +120,6 @@ function saveTable() {
   })
   .then((res) => res.text())
   .then((data) => {
-    location.href = data;
+    location.href = "../html/my-tables-page.html";
   });
 }

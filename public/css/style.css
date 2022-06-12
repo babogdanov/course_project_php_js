@@ -27,19 +27,16 @@ button:hover {
   margin-bottom: 20px;
 }
 
-/* Modal Header */
 .dialog-header {
   padding: 2px 16px;
   background-color: #598df4;
   position: relative;
 }
 
-/* Modal Body */
 .dialog-body {
   padding: 2px 16px;
 }
 
-/* Modal Content */
 .dialog-content {
   display: none;
   position: relative;
@@ -53,7 +50,6 @@ button:hover {
   animation-duration: 1s;
 }
 
-/* Add Animation */
 @keyframes slideFromBottom {
   from {
     top: -300px;
@@ -249,3 +245,10 @@ td > input {
   max-width: 150px;
 }
 
+#table_name {
+  margin: 0 auto;
+  margin-bottom: 10px;
+  min-width: 400px;
+  max-width: 100%;
+  
+}

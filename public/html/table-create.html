@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <script id="replace_with_navbar" src="../js/nav.js" defer></script>
+    <main>
+      <button
+        id="dialog-toggle-button"
+        class="table-button"
+        onclick="dialogOpen()"
+      >
+        Create table
+      </button>
+
+      <div id="table-create-dialog" class="dialog-content">
+        <div class="dialog-header">
+          <button id="dialog-close-icon" onclick="dialogClose()">
+            &times;
+          </button>
+          <h2>Modal Header</h2>
+        </div>
+
+        <div class="dialog-body">
+          Please enter table dimensions:
+          <form id="table-dimensions-form">
+            <label for="columns" class="dialog_label">Columns:</label>
+            <input type="number" id="columns" name="columns" />
+            <label for="rows" class="dialog_label"> Rows:</label>
+            <input type="number" id="rows" name="rows" />
+            <button
+              id="table-create-btn"
+              onclick="event.preventDefault(); tableCreate()"
+            >
+              Create
+            </button>
+          </form>
+        </div>
+      </div>
+      <form id="dynamic_table" name="table">
+        <button class="table-button" onclick="event.preventDefault(); saveTable()">Save Table</button>
+      </form>
+
+      <button class="table-button" onclick="download_table_as_csv()">
+        Download as CSV
+      </button>
+
+      <script type="text/javascript" src="../js/dialog_toggle.js"></script>
+      <script type="text/javascript" src="../js/table.js"></script>
+    </main>
+  </body>
+</html>
