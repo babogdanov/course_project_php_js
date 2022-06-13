@@ -26,6 +26,14 @@ function changeNav() {
     logOutLink.setAttribute("onclick", "logOut()");
     logOutLink.innerHTML = "Log out";
     nav.appendChild(logOutLink);
+    var createLink = document.createElement("a");
+    createLink.setAttribute("href", "table-create.html");
+    createLink.innerHTML = "Create table";
+    nav.appendChild(createLink);
+    var detailedViewLink = document.createElement("a");
+    detailedViewLink.setAttribute("href", "my-tables-page.html");
+    detailedViewLink.innerHTML = "See your tables";
+    nav.appendChild(detailedViewLink);
   }
 }
 

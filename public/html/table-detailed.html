@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My tables</title>
+    <link rel="stylesheet" href="./../css/style.css" />
+    <script src="../js/my_tables.js"></script>
+  </head>
+  <body onload="getDetailedTable(new URLSearchParams(window.location.search).get('id'))">
+    <script id="replace_with_navbar" src="../js/nav.js" defer></script>
+    <form id="dynamic_table" name="table">
+        <button class="table-button" onclick="event.preventDefault(); saveTable()">Save Table</button>
+        <button class="table-button" onclick="event.preventDefault(); downloadTableAsCsv()">
+            Download as CSV
+        </button>
+      </form>
+      <script src="../js/table.js"></script>
+  </body>
+</html>
