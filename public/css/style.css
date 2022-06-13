@@ -68,7 +68,7 @@ button:hover {
 
 a {
   text-decoration: none;
-  color: #2975a5;
+  color: #2f7eaf;
 }
 
 @keyframes lift {
@@ -192,6 +192,15 @@ section input {
   width: 5%;
   height: 3%;
 }
+.welcome {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+
+  width: 25%;
+  height: 30%;
+}
 
 nav {
   margin: 0;
@@ -252,4 +261,41 @@ td > input {
   min-width: 400px;
   max-width: 100%;
   
+}
+
+
+
+
+
+
+
+.btn1 {
+    background-color: #666766;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 24px;
+    margin: auto;
+    cursor: pointer;
+  
+}
+
+.btn1:hover {
+  background-color: #000000;
+}
+.column {
+  float:left;
+  width: 33.33%;
+}
+.row {
+margin-top: 50px;
+margin-bottom: 50px;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
