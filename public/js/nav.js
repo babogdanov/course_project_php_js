@@ -32,7 +32,7 @@ function changeNav() {
     nav.appendChild(createLink);
     var detailedViewLink = document.createElement("a");
     detailedViewLink.setAttribute("href", "my-tables-page.html");
-    detailedViewLink.innerHTML = "See your tables";
+    detailedViewLink.innerHTML = "Tables list";
     nav.appendChild(detailedViewLink);
   }
 }
