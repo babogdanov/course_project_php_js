@@ -34,6 +34,10 @@ function changeNav() {
     detailedViewLink.setAttribute("href", "my-tables-page.html");
     detailedViewLink.innerHTML = "Tables list";
     nav.appendChild(detailedViewLink);
+    var uploadLink = document.createElement("a");
+    uploadLink.setAttribute("href", "upload-table.html");
+    uploadLink.innerHTML = "Upload table";
+    nav.appendChild(uploadLink);
   }
 }
 

@@ -6,8 +6,11 @@
     <link rel="stylesheet" href="./../css/style.css" />
     <script src="../js/table.js"></script>
   </head>
-  <body onload="getAllTables()">
+  <body>
     <script id="replace_with_navbar" src="../js/nav.js" defer></script>
-    <ul id="myTables"></ul>
+    <form enctype="multipart/form-data" method="POST">
+        Choose a file to upload: <input name="uploadedfile" type="file" />
+        <button class="table-button" onclick="event.preventDefault(); uploadTable()">Upload</button>
+    </form>
   </body>
 </html>

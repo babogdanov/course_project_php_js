@@ -22,7 +22,7 @@ function tempAlert(msg, duration) {
 checkIfUserIsLogged();
 
 // Quick and simple export target #table_id into a csv
-function downloadTableAsCsv(separator = ",") {
+function downloadTableAsCsv(separator = ";") {
   const name = !!document.getElementById("table_name")
     ? document.getElementById("table_name").value
     : table;
@@ -119,6 +119,34 @@ function tableCreate(tableValues, name) {
     : {};
 }
 
+function getAllTables() {
+    var list = document.getElementById("myTables");
+
+    fetch("../../src/getAllTables.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({"email":localStorage.getItem("email")}),
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        if (data["status"] == 200) {
+            for (var table of data["tables"]) {
+                var element =  document.createElement("li");
+                var link = document.createElement("a");
+                link.setAttribute("href", `table-detailed.html?id=${table.id}`);
+                link.innerText = table["name"];
+                element.appendChild(link);
+                list.appendChild(element);
+            }
+        } else {
+            console.log(data["message"]);
+            tempAlert("Something went wrong!", 4000);
+        }
+    });
+}
+
 function saveTable() {
   var rows = document.querySelectorAll("#dynamic_table table tbody tr");
   var tableData = [];
@@ -131,45 +159,10 @@ function saveTable() {
     tableData.push(currRow);
   }
 
-  const data = {
-    name: document.getElementById("table_name").value,
-    creator: localStorage.getItem("email"),
-    rows: tableData.length,
-    columns: tableData[0].length,
-    table: tableData,
-  };
-
-  fetch("../../src/saveTable.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data["status"] == 201) {
-        tempAlert(
-          "Успешно запазване на таблица! Пренасочване към моите таблици.",
-          4000
-        );
-        setTimeout(function () {
-          location.href = "my-tables-page.html";
-        }, 4000);
-      } else if (data["status"] == 400) {
-        console.log(data["message"]);
-        tempAlert("Подадените данни не са валидни!", 4000);
-        location.href = "table-create.html";
-      } else {
-        console.log(data["message"]);
-        tempAlert("Нещо много се обърка!", 4000);
-        location.href = "table-create.html";
-      }
-    });
+  callSaveAPI(document.getElementById("table_name").value, tableData);
 }
 
 function getDetailedTable(id) {
-  console.log(id);
   fetch("../../src/getTable.php", {
     method: "POST",
     headers: {
@@ -183,12 +176,9 @@ function getDetailedTable(id) {
         let table = JSON.parse(data["table"].table);
         let name = data["table"].name;
         tableCreate(table, name);
-      } else if (data["status"] == 400) {
-        console.log(data["message"]);
-        tempAlert("Подадените данни не са валидни!", 4000);
       } else {
         console.log(data["message"]);
-        tempAlert("Нещо много се обърка!", 4000);
+        tempAlert("Something went wrong!", 4000);
       }
     });
 }
@@ -210,7 +200,7 @@ function updateTable(id) {
     name: document.getElementById("table_name").value,
     table: tableData,
   };
-console.log(data);
+
   fetch("../../src/updateTable.php", {
     method: "POST",
     headers: {
@@ -222,18 +212,77 @@ console.log(data);
     .then((data) => {
       if (data["status"] == 204) {
         tempAlert(
-          "Успешно обновяване на таблица!",
+          "Successfuly updated table!",
           4000
         );
       } else if (data["status"] == 400) {
         console.log(data["message"]);
-        tempAlert("Подадените данни не са валидни!", 4000);
+        tempAlert("Passed values are not correct!", 4000);
         setTimeout(() => location.href="my-tables-page.html",4000);
       } else {
         console.log(data["message"]);
-        tempAlert("Нещо много се обърка!", 4000);
+        tempAlert("Something went wrong!", 4000);
         window.location.reload();
         setTimeout(() => location.href="my-tables-page.html",4000);
       }
     });
+}
+
+function uploadTable() {
+    const file = document.getElementsByName('uploadedfile')[0];
+    const formData = new FormData();
+    formData.append('csv', file.files[0]);
+
+    fetch("../../src/readTableFromCSV.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data["status"] == 200) {
+              callSaveAPI("uploaded",  data["table"]);
+          } else if (data["status"] == 400) {
+            console.log(data["message"]);
+            tempAlert("The file isn't CSV", 4000);
+          } else {
+            console.log(data["message"]);
+            tempAlert("Something went wrong!", 4000);
+          }
+        });
+}
+
+function callSaveAPI(name, tableData) {
+    const data = {
+        name: name,
+        creator: localStorage.getItem("email"),
+        rows: tableData.length,
+        columns: tableData[0].length,
+        table: tableData,
+      };
+    
+      fetch("../../src/saveTable.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data["status"] == 201) {
+            tempAlert(
+              "Successfuly saved table! Going to my tables.",
+              4000
+            );
+            setTimeout(function () {
+              location.href = "my-tables-page.html";
+            }, 4000);
+          } else if (data["status"] == 400) {
+            console.log(data["message"]);
+            tempAlert("Passed values are not correct!", 4000);
+          } else {
+            console.log(data["message"]);
+            tempAlert("Something went wrong!", 4000);
+          }
+        });
 }

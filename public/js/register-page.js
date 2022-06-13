@@ -50,10 +50,10 @@ function validateAndShowErrorMessageIfNeeded() {
             },4000);
         } else if (data["status"] == 400) {
             console.log(data["message"]);
-            tempAlert("Подадените данни не са валидни!", 4000);
+            tempAlert("Passed values are not correct", 4000);
         } else {
             console.log(data["message"]);
-            tempAlert("Нещо много се обърка!", 4000);
+            tempAlert("Something went wrong!", 4000);
         }
       });
   }
