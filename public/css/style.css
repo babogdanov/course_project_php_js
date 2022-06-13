@@ -247,6 +247,7 @@ td > input {
 
 #table_name {
   margin: 0 auto;
+  margin-top: 20px;
   margin-bottom: 10px;
   min-width: 400px;
   max-width: 100%;

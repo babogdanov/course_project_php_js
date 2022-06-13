@@ -34,7 +34,7 @@ function getAllTables() {
             for (var table of data["tables"]) {
                 var element =  document.createElement("li");
                 var link = document.createElement("a");
-                link.setAttribute("href", "#");
+                link.setAttribute("href", `table-detailed.html?id=${table.id}`);
                 link.innerText = table["name"];
                 element.appendChild(link);
                 list.appendChild(element);
