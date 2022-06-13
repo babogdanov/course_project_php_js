@@ -192,3 +192,48 @@ function getDetailedTable(id) {
       }
     });
 }
+
+function updateTable(id) {
+  var rows = document.querySelectorAll("#dynamic_table table tbody tr");
+  var tableData = [];
+  for (var i = 0; i < rows.length; i++) {
+    var currRow = [];
+    var cols = rows[i].querySelectorAll("td");
+    for (var j = 0; j < cols.length; j++) {
+      currRow.push(cols[j].firstChild.value);
+    }
+    tableData.push(currRow);
+  }
+
+  const data = {
+    id: id,
+    name: document.getElementById("table_name").value,
+    table: tableData,
+  };
+console.log(data);
+  fetch("../../src/updateTable.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data["status"] == 204) {
+        tempAlert(
+          "Успешно обновяване на таблица!",
+          4000
+        );
+      } else if (data["status"] == 400) {
+        console.log(data["message"]);
+        tempAlert("Подадените данни не са валидни!", 4000);
+        setTimeout(() => location.href="my-tables-page.html",4000);
+      } else {
+        console.log(data["message"]);
+        tempAlert("Нещо много се обърка!", 4000);
+        window.location.reload();
+        setTimeout(() => location.href="my-tables-page.html",4000);
+      }
+    });
+}

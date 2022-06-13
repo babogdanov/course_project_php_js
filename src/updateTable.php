@@ -3,7 +3,6 @@
 require_once("./db/db.php");
 
 $post = json_decode(file_get_contents("php://input"), true);
-
 if($post && isset($post["id"]) && isset($post["name"]) && isset($post["table"])) {
     $tableID = $post["id"];
     $name = $post["name"];
