@@ -2,8 +2,10 @@
 
 require_once("./db/db.php");
 
-if($_GET && isset($_GET["id"])) {
-    $tableID = $_GET["id"];
+$post = json_decode(file_get_contents("php://input"), true);
+
+if($post && isset($post["id"])) {
+    $tableID = $post["id"];
 
     try {
         $db = new DB();
